@@ -1,0 +1,28 @@
+{
+  "name": "lire",
+  "version": "0.0.0",
+  "description": "Read file.",
+  "main": "lire.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volkovasystems/lire.git"
+  },
+  "keywords": [
+    "read",
+    "file",
+    "lire"
+  ],
+  "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/volkovasystems/lire/issues"
+  },
+  "homepage": "https://github.com/volkovasystems/lire#readme",
+  "dependencies": {
+    "kept": "^0.1.0",
+    "letgo": "0.0.0"
+  }
+}
