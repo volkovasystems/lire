@@ -1,5 +1,3 @@
-"use strict";
-
 /*;
 	@module-license:
 		The MIT License (MIT)
@@ -49,7 +47,8 @@
 		{
 			"fs": "fs",
 			"kept": "kept",
-			"letgo": "letgo"
+			"letgo": "letgo",
+			"zelf": "zelf"
 		}
 	@end-include
 */
@@ -57,6 +56,7 @@
 var fs = require( "fs" );
 var kept = require( "kept" );
 var letgo = require( "letgo" );
+var zelf = require( "zelf" );
 
 var lire = function lire( path, synchronous ){
 	/*;
@@ -91,7 +91,9 @@ var lire = function lire( path, synchronous ){
 		}
 
 	}else{
-		var catcher = letgo.bind( this )( );
+		var self = zelf( this );
+
+		var catcher = letgo.bind( self )( );
 
 		kept( path, READ )
 			( function ifReadable( error, readable ){
