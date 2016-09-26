@@ -42,6 +42,7 @@
 	@end-module-configuration
 
 	@module-documentation:
+		Read file.
 	@end-module-documentation
 
 	@include:
@@ -67,9 +68,7 @@ var lire = function lire( path, synchronous ){
 		@end-meta-configuration
 	*/
 
-	if( typeof path != "string" ||
-		!path )
-	{
+	if( typeof path != "string" || !path ){
 		throw new Error( "invalid path" );
 	}
 
