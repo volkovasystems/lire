@@ -1,6 +1,6 @@
 {
   "name": "lire",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Read file.",
   "main": "lire.js",
   "scripts": {
@@ -16,14 +16,19 @@
     "lire"
   ],
   "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "contributors": [
+    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/volkovasystems/lire/issues"
   },
   "homepage": "https://github.com/volkovasystems/lire#readme",
   "dependencies": {
-    "kept": "^0.1.1",
-    "letgo": "0.0.3",
-    "zelf": "0.0.4"
+    "falzy": "^0.5.0",
+    "kept": "^0.6.0",
+    "letgo": "^0.3.0",
+    "protype": "^0.4.0",
+    "zelf": "^0.3.0"
   }
 }

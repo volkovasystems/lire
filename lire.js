@@ -32,6 +32,9 @@
 			"file": "lire.js",
 			"module": "lire",
 			"author": "Richeve S. Bebedor",
+			"contributors": [
+				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+			],
 			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com/volkovasystems/lire.git",
 			"test": "lire-test.js",
@@ -45,20 +48,24 @@
 
 	@include:
 		{
+			"falzy": "falzy",
 			"fs": "fs",
 			"kept": "kept",
 			"letgo": "letgo",
+			"protype": "protype",
 			"zelf": "zelf"
 		}
 	@end-include
 */
 
-var fs = require( "fs" );
-var kept = require( "kept" );
-var letgo = require( "letgo" );
-var zelf = require( "zelf" );
+const falzy = require( "falzy" );
+const fs = require( "fs" );
+const kept = require( "kept" );
+const letgo = require( "letgo" );
+const protype = require( "protype" );
+const zelf = require( "zelf" );
 
-var lire = function lire( path, synchronous ){
+const lire = function lire( path, synchronous ){
 	/*;
 		@meta-configuration:
 			{
@@ -68,7 +75,7 @@ var lire = function lire( path, synchronous ){
 		@end-meta-configuration
 	*/
 
-	if( typeof path != "string" || !path ){
+	if( !protype( path, STRING ) || falzy( path ) ){
 		throw new Error( "invalid path" );
 	}
 
@@ -91,9 +98,9 @@ var lire = function lire( path, synchronous ){
 		}
 
 	}else{
-		var self = zelf( this );
+		let self = zelf( this );
 
-		var catcher = letgo.bind( self )( );
+		let catcher = letgo.bind( self )( );
 
 		kept( path, READ )
 			( function ifReadable( error, readable ){
