@@ -1,10 +1,10 @@
 {
   "name": "lire",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Read file.",
   "main": "lire.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha lire-test.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,10 @@
   },
   "homepage": "https://github.com/volkovasystems/lire#readme",
   "dependencies": {
-    "falzy": "^0.5.0",
-    "kept": "^0.6.0",
-    "letgo": "^0.3.0",
-    "protype": "^0.4.0",
-    "zelf": "^0.3.0"
+    "falzy": "^0.7.0",
+    "kept": "^0.8.0",
+    "letgo": "^0.6.0",
+    "protype": "^0.8.0",
+    "zelf": "^0.4.0"
   }
 }
