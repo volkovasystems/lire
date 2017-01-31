@@ -86,7 +86,7 @@ const lire = function lire( path, synchronous ){
 					return fs.readFileSync( path, "utf8" );
 
 				}catch( error ){
-					throw new Error( "error reading file, " + error.message );
+					throw new Error( `error reading file, ${ error }` );
 				}
 
 			}else{
@@ -94,38 +94,38 @@ const lire = function lire( path, synchronous ){
 			}
 
 		}catch( error ){
-			throw new Error( "error checking file if readable, " + error.message );
+			throw new Error( `cannot read file, ${ error }` );
 		}
 
 	}else{
 		let self = zelf( this );
 
-		let catcher = letgo.bind( self )( );
+		let catcher = letgo.bind( self )( function later( cache ){
+			kept( path, READ )
+				( function done( error, readable ){
+					if( error ){
+						error = new Error( `cannot read file, ${ error }` );
+						
+						cache.callback( error, "" );
 
-		kept( path, READ )
-			( function ifReadable( error, readable ){
-				if( error ){
-					error = new Error( "error checking file readability, " + error.message );
+					}else if( readable ){
+						fs.readFile( path, "utf8",
+							function done( error, result ){
+								if( error ){
+									error = new Error( `error reading file, ${ error }` );
 
-					catcher.cache.callback( error, "" );
+									cache.callback( error, "" );
 
-				}else if( readable ){
-					fs.readFile( path, "utf8",
-						function onRead( error, result ){
-							if( error ){
-								error = new Error( "error reading file, " + error.message );
+								}else{
+									cache.callback( null, result );
+								}
+							} );
 
-								catcher.cache.callback( error, "" );
-
-							}else{
-								catcher.cache.callback( null, result );
-							}
-						} );
-
-				}else{
-					catcher.cache.callback( null, "" );
-				}
-			} );
+					}else{
+						cache.callback( null, "" );
+					}
+				} );
+		} );
 
 		return catcher;
 	}
