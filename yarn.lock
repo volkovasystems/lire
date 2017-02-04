@@ -299,9 +299,9 @@ kein@^0.8.0:
     falzy "^0.10.0"
     protype "^0.11.0"
 
-kept@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/kept/-/kept-0.9.0.tgz#3e3cb3867ab9f21f6c1444b9cca86f53198181b9"
+kept@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/kept/-/kept-0.10.0.tgz#6d6980c366e00cb83b35fa918ea7bc85c953aee4"
   dependencies:
     depher "^0.8.0"
     falzy "^0.10.0"
