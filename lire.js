@@ -86,7 +86,7 @@ const lire = function lire( path, synchronous ){
 					return fs.readFileSync( path, "utf8" );
 
 				}catch( error ){
-					throw new Error( `error reading file, ${ error }` );
+					throw new Error( `error reading file, ${ error.stack }` );
 				}
 
 			}else{
@@ -94,7 +94,7 @@ const lire = function lire( path, synchronous ){
 			}
 
 		}catch( error ){
-			throw new Error( `cannot read file, ${ error }` );
+			throw new Error( `cannot read file, ${ error.stack }` );
 		}
 
 	}else{
@@ -104,15 +104,15 @@ const lire = function lire( path, synchronous ){
 			kept( path, READ )
 				( function done( error, readable ){
 					if( error ){
-						error = new Error( `cannot read file, ${ error }` );
-						
+						error = new Error( `cannot read file, ${ error.stack }` );
+
 						cache.callback( error, "" );
 
 					}else if( readable ){
 						fs.readFile( path, "utf8",
 							function done( error, result ){
 								if( error ){
-									error = new Error( `error reading file, ${ error }` );
+									error = new Error( `error reading file, ${ error.stack }` );
 
 									cache.callback( error, "" );
 
