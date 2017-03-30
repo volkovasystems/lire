@@ -1,6 +1,6 @@
 {
   "name": "lire",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Read file.",
   "main": "lire.js",
   "scripts": {
@@ -26,8 +26,8 @@
   "homepage": "https://github.com/volkovasystems/lire#readme",
   "dependencies": {
     "falzy": "^0.17.0",
-    "kept": "^0.14.0",
-    "letgo": "^0.22.0",
+    "kept": "^0.15.0",
+    "letgo": "^0.23.0",
     "protype": "^0.21.0",
     "zelf": "^0.11.0"
   }
