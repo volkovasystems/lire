@@ -112,7 +112,8 @@ const lire = function lire( path, synchronous ){
 						fs.readFile( path, "utf8",
 							function done( error, result ){
 								if( error ){
-									error = new Error( `error reading file, ${ error.stack }` );
+									error = new Error( `error reading file,
+											${ error.stack }` );
 
 									cache.callback( error, "" );
 
