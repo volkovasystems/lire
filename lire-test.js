@@ -1,8 +1,12 @@
+
+const assert = require( "assert" );
 const lire = require( "./lire.js" );
 
-console.log( lire( "./package.json", true ) )
+assert.equal( lire( "./test.txt", true ), "hello world", "should be equal" );
 
-lire( "./package.json" )
+lire( "./test.txt" )
 	( function done( error, result ){
-		console.log( arguments );
+		assert.equal( result, "hello world", "should be equal" );
+
+		console.log( "ok" );
 	} );

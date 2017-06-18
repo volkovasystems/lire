@@ -51,7 +51,6 @@
 			"falzy": "falzy",
 			"fs": "fs",
 			"kept": "kept",
-			"letgo": "letgo",
 			"protype": "protype",
 			"zelf": "zelf"
 		}
@@ -61,7 +60,6 @@
 const falzy = require( "falzy" );
 const fs = require( "fs" );
 const kept = require( "kept" );
-const letgo = require( "letgo" );
 const protype = require( "protype" );
 const zelf = require( "zelf" );
 
@@ -75,18 +73,18 @@ const lire = function lire( path, synchronous ){
 		@end-meta-configuration
 	*/
 
-	if( !protype( path, STRING ) || falzy( path ) ){
+	if( falzy( path ) || !protype( path, STRING ) ){
 		throw new Error( "invalid path" );
 	}
 
-	if( synchronous ){
+	if( synchronous === true ){
 		try{
 			if( kept( path, READ, synchronous ) ){
 				try{
-					return fs.readFileSync( path, "utf8" );
+					return fs.readFileSync( path, "utf8" ).trim( );
 
 				}catch( error ){
-					throw new Error( `error reading file, ${ error.stack }` );
+					throw new Error( `cannot read file, ${ error.stack }` );
 				}
 
 			}else{
@@ -98,35 +96,28 @@ const lire = function lire( path, synchronous ){
 		}
 
 	}else{
-		let self = zelf( this );
+		let catcher = kept.bind( zelf( this ) )( path, READ )
+			.then( function done( error, readable ){
+				if( error instanceof Error ){
+					return catcher.pass( new Error( `cannot read file, ${ error.stack }` ), "" );
 
-		let catcher = letgo.bind( self )( function later( cache ){
-			kept( path, READ )
-				( function done( error, readable ){
-					if( error ){
-						error = new Error( `cannot read file, ${ error.stack }` );
+				}else if( readable ){
+					fs.readFile( path, "utf8",
+						function done( error, result ){
+							if( error instanceof Error ){
+								catcher.pass( new Error( `cannot read file, ${ error.stack }` ), "" );
 
-						cache.callback( error, "" );
+							}else{
+								catcher.pass( null, result.trim( ) );
+							}
+						} );
 
-					}else if( readable ){
-						fs.readFile( path, "utf8",
-							function done( error, result ){
-								if( error ){
-									error = new Error( `error reading file,
-											${ error.stack }` );
+					return catcher;
 
-									cache.callback( error, "" );
-
-								}else{
-									cache.callback( null, result );
-								}
-							} );
-
-					}else{
-						cache.callback( null, "" );
-					}
-				} );
-		} );
+				}else{
+					return catcher.pass( null, "" );
+				}
+			} );
 
 		return catcher;
 	}
