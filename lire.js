@@ -32,10 +32,10 @@
 			"file": "lire.js",
 			"module": "lire",
 			"author": "Richeve S. Bebedor",
+			"eMail": "richeve.bebedor@gmail.com",
 			"contributors": [
 				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
 			],
-			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com/volkovasystems/lire.git",
 			"test": "lire-test.js",
 			"global": true
