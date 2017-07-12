@@ -8,7 +8,5 @@ lire( "./test.txt" )
 	( function done( error, result ){
 		assert.equal( result, "hello world", "should be equal" );
 
-		console.log( "Finished reading file" );
+		console.log( "ok" );
 	} );
-
-console.log( "ok" );

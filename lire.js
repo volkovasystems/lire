@@ -51,7 +51,6 @@
 			"falzy": "falzy",
 			"fs": "fs",
 			"kept": "kept",
-			"protype": "protype",
 			"zelf": "zelf"
 		}
 	@end-include
@@ -60,8 +59,9 @@
 const falzy = require( "falzy" );
 const fs = require( "fs" );
 const kept = require( "kept" );
-const protype = require( "protype" );
 const zelf = require( "zelf" );
+
+const EMPTY_STRING = "";
 
 const lire = function lire( path, synchronous ){
 	/*;
@@ -73,7 +73,7 @@ const lire = function lire( path, synchronous ){
 		@end-meta-configuration
 	*/
 
-	if( falzy( path ) || !protype( path, STRING ) ){
+	if( falzy( path ) || typeof path != "string" ){
 		throw new Error( "invalid path" );
 	}
 
@@ -88,7 +88,7 @@ const lire = function lire( path, synchronous ){
 				}
 
 			}else{
-				return "";
+				return EMPTY_STRING;
 			}
 
 		}catch( error ){
@@ -98,25 +98,20 @@ const lire = function lire( path, synchronous ){
 	}else{
 		let catcher = kept.bind( zelf( this ) )( path, READ )
 			.then( function done( error, readable ){
-				if( error instanceof Error ){
-					return catcher.pass( new Error( `cannot read file, ${ error.stack }` ), "" );
+				if( readable ){
+					fs.readFile( path, "utf8", function done( error, result ){
+						if( error instanceof Error ){
+							catcher.pass( new Error( `cannot read file, ${ error.stack }` ), EMPTY_STRING );
 
-				}else if( readable ){
-					fs.readFile( path, "utf8",
-						function done( error, result ){
-							if( error instanceof Error ){
-								catcher.pass( new Error( `cannot read file, ${ error.stack }` ), "" );
-
-							}else{
-								catcher.pass( null, result.trim( ) );
-							}
-						} );
+						}else{
+							catcher.pass( null, result.trim( ) );
+						}
+					} );
 
 					return catcher;
-
-				}else{
-					return catcher.pass( null, "" );
 				}
+
+				return catcher.pass( null, EMPTY_STRING );
 			} );
 
 		return catcher;
